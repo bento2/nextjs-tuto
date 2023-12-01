@@ -1,6 +1,6 @@
 import { PowerIcon } from '@heroicons/react/24/outline';
 
-import { auth, signOut } from '@/app/auth';
+import { auth, signOut } from '@/auth';
 
 export default function SignLink() {
   
