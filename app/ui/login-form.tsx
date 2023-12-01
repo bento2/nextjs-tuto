@@ -11,8 +11,9 @@ import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 
+
 export default function LoginForm() {
-  const [state, dispatch] = useFormState(authenticate, undefined);
+  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
   return (
     <form className="space-y-3" action={dispatch}>
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
@@ -61,17 +62,17 @@ export default function LoginForm() {
           </div>
         </div>
         <LoginButton />
-        
+
         <div
-          className="flex h-8 items-end space-x-1"
-          aria-live="polite"
-          aria-atomic="true"
+            className="flex h-8 items-end space-x-1"
+            aria-live="polite"
+            aria-atomic="true"
         >
-          {state === 'CredentialsSignin' && (
-            <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">Invalid credentials</p>
-            </>
+          {errorMessage && (
+              <>
+                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                <p className="text-sm text-red-500">{errorMessage}</p>
+              </>
           )}
         </div>
       </div>
