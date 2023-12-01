@@ -1,10 +1,13 @@
+import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next"
+
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { authConfig } from './auth.config';
+import { authConfig } from '@/app/auth.config';
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
+import GitHub from "@auth/core/providers/github"
  
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -18,7 +21,7 @@ async function getUser(email: string): Promise<User | undefined> {
  
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
-  providers: [
+  providers: [    
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
