@@ -23,7 +23,8 @@ export async function authenticate(
                     return 'Something went wrong.';
             }**/
         }
-        throw error;
+        return "Invalid credentials.";
+        //throw error;
     }
 }
 
